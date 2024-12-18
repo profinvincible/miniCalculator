@@ -1,8 +1,6 @@
 import './App.css';
-
-
 import React, { useState } from 'react';
-import './App.css';
+
 
 function App() {
     const [input, setInput] = useState('');
@@ -28,6 +26,41 @@ function App() {
         }
     };
 
+    // Scientific functions
+    const handleScientificFunction = (fn) => {
+        switch (fn) {
+            case 'sqrt':
+                setInput(Math.sqrt(eval(input)).toString());
+                break;
+            case 'pow':
+                setInput(Math.pow(eval(input), 2).toString()); // Power of 2
+                break;
+            case 'sin':
+                setInput(Math.sin(eval(input)).toString());
+                break;
+            case 'cos':
+                setInput(Math.cos(eval(input)).toString());
+                break;
+            case 'tan':
+                setInput(Math.tan(eval(input)).toString());
+                break;
+            case 'log':
+                setInput(Math.log10(eval(input)).toString());
+                break;
+            case 'factorial':
+                setInput(factorial(eval(input)).toString());
+                break;
+            default:
+                break;
+        }
+    };
+
+    // Factorial Function
+    const factorial = (n) => {
+        if (n < 0) return 'Error'; 
+        return n === 0 || n === 1 ? 1 : n * factorial(n - 1);
+    };
+
     const toggleTheme = () => {
         setIsDarkMode(!isDarkMode);
     };
@@ -44,6 +77,7 @@ function App() {
                 className="input"
             />
             <div className="buttons">
+                {/* Add Scientific Buttons */}
                 {['7', '8', '9', '/', '4', '5', '6', '*', '1', '2', '3', '-', '0', '.', '=', '+'].map((btn) => (
                     <button
                         key={btn}
@@ -59,11 +93,15 @@ function App() {
                         {btn}
                     </button>
                 ))}
-                {/* AC Button */}
+                {/* Scientific function buttons */}
+                {['sqrt', 'pow', 'sin', 'cos', 'tan', 'log', 'factorial'].map((fn) => (
+                    <button key={fn} onClick={() => handleScientificFunction(fn)} className="scientific-button">
+                        {fn}
+                    </button>
+                ))}
                 <button onClick={clearInput} className="clear-button">
                     C
                 </button>
-                {/* Clear Button */}
                 <button onClick={clearLastCharacter} className="ac-button">
                     AC
                 </button>
@@ -73,9 +111,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-

@@ -215,3 +215,35 @@
 .clear-button:hover {
   background-color: #e53935;
 }
+
+
+/* App.css */
+
+/* Scientific Function Buttons */
+.scientific-button {
+  background-color: green; /* Different color for scientific buttons */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 50px;
+  font-size: 16px;
+}
+
+/* Hover effect for scientific buttons */
+.scientific-button:hover {
+  background-color: #1976D2;
+}
+
+/* Grid Layout (Optional) */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns for basic buttons */
+  gap: 10px;
+}
+
+/* Adjust layout for scientific buttons */
+.buttons.scientific {
+  grid-template-columns: repeat(5, 1fr); /* 5 columns for scientific functions */
+}
