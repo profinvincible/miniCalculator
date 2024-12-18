@@ -72,7 +72,7 @@
   cursor: pointer;
   border: none;
   border-radius: 5px;
-}
+  }
 
 /* Light Theme */
 .light-mode {
@@ -118,14 +118,60 @@
   cursor: pointer;
   border: none;
   border-radius: 5px;
+  
 }
 
 .light-mode .toggle-button {
-  background-color: grey;
+  background-color: #e68900;
   color: white;
 }
 
 .dark-mode .toggle-button {
   background-color: #444;
   color: white;
+}
+
+.c {
+  background-color: #28a745; /* Green color */
+  color: white;
+}
+
+/* App.css */
+
+/* Operator Buttons */
+.operator-button {
+  background-color: #ff9800; /* Different color for operators */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 50px;
+  font-size: 18px;
+}
+
+/* Add a hover effect */
+.operator-button:hover {
+  background-color: #e68900;
+}
+
+
+/* App.css */
+
+/* Clear Button */
+.clear-button {
+  grid-column: span 4; /* Make the Clear button span across 4 columns */
+  background-color: #f44336; /* You can change this to any color */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 50px;
+  font-size: 18px;
+}
+
+/* Add hover effect for Clear button */
+.clear-button:hover {
+  background-color: #e53935;
 }

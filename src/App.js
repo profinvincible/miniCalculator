@@ -1,12 +1,5 @@
 import './App.css';
 
-// function App() {
-//   return (
-//     <div className="App">
-    
-//     </div>
-//   );
-// }
 
 
 import React, { useState } from 'react';
@@ -47,26 +40,27 @@ function App() {
                 readOnly
                 className="input"
             />
-            <div className="buttons">
-                {['7', '8', '9', '/', '4', '5', '6', '*', '1', '2', '3', '-', '0', '.', '=', '+'].map((btn) => (
-                    <button
-                        key={btn}
-                        onClick={
-                            btn === '='
-                                ? calculateResult
-                                : btn === 'C'
-                                ? clearInput
-                                : () => handleButtonClick(btn)
-                        }
-                        className="button"
-                    >
-                        {btn}
-                    </button>
-                ))}
-                <button onClick={clearInput} className="button">
-                    C
-                </button>
-            </div>
+       <div className="buttons">
+    {['7', '8', '9', '/', '4', '5', '6', '*', '1', '2', '3', '-', '0', '.', '=', '+'].map((btn) => (
+        <button
+            key={btn}
+            onClick={
+                btn === '='
+                    ? calculateResult
+                    : btn === 'C'
+                    ? clearInput
+                    : () => handleButtonClick(btn)
+            }
+            className={['/', '*', '-', '+', '='].includes(btn) ? 'operator-button' : 'button'}
+        >
+            {btn}
+        </button>
+    ))}
+    <button onClick={clearInput} className="clear-button">
+        Clear
+    </button>
+</div>
+
         </div>
     );
 }
