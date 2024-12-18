@@ -175,3 +175,43 @@
 .clear-button:hover {
   background-color: #e53935;
 }
+
+
+
+/* App.css */
+
+/* AC Button (Clears last character) */
+.ac-button {
+  grid-column: span 2; /* Make AC button span across 2 columns */
+  background-color: #f44336; /* Color for the AC button */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 50px;
+  font-size: 18px;
+}
+
+/* Hover effect for AC button */
+.ac-button:hover {
+  background-color: #e53935;
+}
+
+/* Clear Button (Clears everything) */
+.clear-button {
+  grid-column: span 2; /* Make the Clear button span across 2 columns */
+  background-color: #f44336; /* Different color for the Clear button */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 50px;
+  font-size: 18px;
+}
+
+/* Hover effect for Clear button */
+.clear-button:hover {
+  background-color: #e53935;
+}

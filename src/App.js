@@ -1,7 +1,6 @@
 import './App.css';
 
 
-
 import React, { useState } from 'react';
 import './App.css';
 
@@ -14,7 +13,11 @@ function App() {
     };
 
     const clearInput = () => {
-        setInput('');
+        setInput(''); // Clears the entire input
+    };
+
+    const clearLastCharacter = () => {
+        setInput(input.slice(0, -1)); // Clears the last character
     };
 
     const calculateResult = () => {
@@ -40,32 +43,38 @@ function App() {
                 readOnly
                 className="input"
             />
-       <div className="buttons">
-    {['7', '8', '9', '/', '4', '5', '6', '*', '1', '2', '3', '-', '0', '.', '=', '+'].map((btn) => (
-        <button
-            key={btn}
-            onClick={
-                btn === '='
-                    ? calculateResult
-                    : btn === 'C'
-                    ? clearInput
-                    : () => handleButtonClick(btn)
-            }
-            className={['/', '*', '-', '+', '='].includes(btn) ? 'operator-button' : 'button'}
-        >
-            {btn}
-        </button>
-    ))}
-    <button onClick={clearInput} className="clear-button">
-        Clear
-    </button>
-</div>
-
+            <div className="buttons">
+                {['7', '8', '9', '/', '4', '5', '6', '*', '1', '2', '3', '-', '0', '.', '=', '+'].map((btn) => (
+                    <button
+                        key={btn}
+                        onClick={
+                            btn === '='
+                                ? calculateResult
+                                : btn === 'AC'
+                                ? clearLastCharacter
+                                : () => handleButtonClick(btn)
+                        }
+                        className={['/', '*', '-', '+', '='].includes(btn) ? 'operator-button' : 'button'}
+                    >
+                        {btn}
+                    </button>
+                ))}
+                {/* AC Button */}
+                <button onClick={clearInput} className="clear-button">
+                    C
+                </button>
+                {/* Clear Button */}
+                <button onClick={clearLastCharacter} className="ac-button">
+                    AC
+                </button>
+            </div>
         </div>
     );
 }
 
 export default App;
+
+
 
 
 
