@@ -1,0 +1,131 @@
+/* .App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+
+
+/* App.css */
+
+/* Common Styles */
+.calculator {
+  width: 300px;
+  margin: 50px auto;
+  border: 1px solid;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.input {
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  text-align: right;
+  padding: 5px;
+  border: none;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.button {
+  height: 50px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Light Theme */
+.light-mode {
+  background-color: #f9f9f9;
+  color: black;
+  border-color: #ccc;
+}
+
+.light-mode .input {
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+}
+
+.light-mode .button {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Dark Theme */
+.dark-mode {
+  background-color: #222;
+  color: white;
+  border-color: #333;
+}
+
+.dark-mode .input {
+  background-color: #444;
+  color: white;
+  border: 1px solid #555;
+}
+
+.dark-mode .button {
+  background-color: #444;
+  color: white;
+}
+
+/* Theme Toggle Button */
+.toggle-button {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.light-mode .toggle-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.dark-mode .toggle-button {
+  background-color: #444;
+  color: white;
+}
