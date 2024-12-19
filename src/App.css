@@ -1,249 +1,136 @@
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
-
-/* App.css */
-
-/* Common Styles */
+/* General Calculator Styles */
 .calculator {
   width: 300px;
   margin: 50px auto;
-  border: 1px solid;
   padding: 20px;
+  border: 2px solid #ccc;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
-.input {
-  width: 100%;
-  height: 40px;
-  font-size: 18px;
-  margin-bottom: 10px;
-  text-align: right;
-  padding: 5px;
-  border: none;
-}
-
-.buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
-
-.button {
-  height: 50px;
-  font-size: 18px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  }
-
-/* Light Theme */
-.light-mode {
-  background-color: #f9f9f9;
-  color: black;
-  border-color: #ccc;
-}
-
-.light-mode .input {
-  background-color: white;
-  color: black;
-  border: 1px solid #ccc;
-}
-
-.light-mode .button {
-  background-color: gray;
-  color: white;
-}
-
-/* Dark Theme */
-.dark-mode {
+.calculator.dark-mode {
   background-color: #222;
   color: white;
   border-color: #333;
 }
 
-.dark-mode .input {
+.calculator.scientific-mode {
+  width: 500px;
+}
+
+/* Input Field */
+.input {
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  text-align: right;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  
+}
+
+.dark-mode .input{
+  background-color: #444;
+  border: none;
+}
+
+/* Buttons Layout */
+.buttons,
+.scientific-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.scientific-buttons {
+  margin-top: 20px;
+}
+
+.button{
+  height: 50px;
+  font-size: 18px;
+  color: white;
+  border: none;
+  background-color: grey;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.operator-button {
+  height: 50px;
+  font-size: 18px;
+  border: none;
+  background-color: orange;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.scientific-button{
+  height: 50px;
+  font-size: 18px;
+  border: none;
+  background-color: green;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+ }
+
+
+
+/* Clear Buttons */
+.clear-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.clear-button,
+.ac-button {
+  width: 48%;
+  height: 50px;
+  font-size: 18px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.clear-button:hover,
+.ac-button:hover {
+  background-color: #c82333;
+}
+
+/* Toggle Buttons */
+.header button {
+  margin: 5px;
+  padding: 10px 15px;
+  font-size: 14px;
+  border: none;
+  background-color: orange;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 17px;
+}
+
+.dark-mode .header button {
   background-color: #444;
   color: white;
-  border: 1px solid #555;
+  /* border-color: #555; */
 }
+
 
 .dark-mode .button {
   background-color: #444;
   color: white;
+  /* border-color: #555; */
 }
 
-/* Theme Toggle Button */
-.toggle-button {
-  margin-bottom: 10px;
-  padding: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  
-}
-
-.light-mode .toggle-button {
-  background-color: #e68900;
-  color: white;
-}
-
-.dark-mode .toggle-button {
-  background-color: #444;
-  color: white;
-}
-
-.c {
-  background-color: #28a745; /* Green color */
-  color: white;
-}
-
-/* App.css */
-
-/* Operator Buttons */
-.operator-button {
-  background-color: #ff9800; /* Different color for operators */
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  height: 50px;
-  font-size: 18px;
-}
-
-/* Add a hover effect */
-.operator-button:hover {
-  background-color: #e68900;
-}
-
-
-/* App.css */
-
-/* Clear Button */
-.clear-button {
-  grid-column: span 4; /* Make the Clear button span across 4 columns */
-  background-color: #f44336; /* You can change this to any color */
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  height: 50px;
-  font-size: 18px;
-}
-
-/* Add hover effect for Clear button */
-.clear-button:hover {
-  background-color: #e53935;
-}
-
-
-
-/* App.css */
-
-/* AC Button (Clears last character) */
-.ac-button {
-  grid-column: span 2; /* Make AC button span across 2 columns */
-  background-color: #f44336; /* Color for the AC button */
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  height: 50px;
-  font-size: 18px;
-}
-
-/* Hover effect for AC button */
-.ac-button:hover {
-  background-color: #e53935;
-}
-
-/* Clear Button (Clears everything) */
-.clear-button {
-  grid-column: span 2; /* Make the Clear button span across 2 columns */
-  background-color: #f44336; /* Different color for the Clear button */
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  height: 50px;
-  font-size: 18px;
-}
-
-/* Hover effect for Clear button */
-.clear-button:hover {
-  background-color: #e53935;
-}
-
-
-/* App.css */
-
-/* Scientific Function Buttons */
-.scientific-button {
-  background-color: green; /* Different color for scientific buttons */
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  height: 50px;
-  font-size: 16px;
-}
-
-/* Hover effect for scientific buttons */
-.scientific-button:hover {
-  background-color: #1976D2;
-}
-
-/* Grid Layout (Optional) */
-.buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns for basic buttons */
-  gap: 10px;
-}
-
-/* Adjust layout for scientific buttons */
-.buttons.scientific {
-  grid-template-columns: repeat(5, 1fr); /* 5 columns for scientific functions */
-}
+/* .header button:hover {
+  background-color: #0056b3;
+} */

@@ -1,113 +1,164 @@
-import './App.css';
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import "./App.css";
 
+const App = () => {
+  const [input, setInput] = useState("");
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isScientificMode, setIsScientificMode] = useState(false);
+  const [isRadians, setIsRadians] = useState(true);
 
-function App() {
-    const [input, setInput] = useState('');
-    const [isDarkMode, setIsDarkMode] = useState(false);
+  const handleButtonClick = (value) => {
+    setInput(input + value);
+  };
 
-    const handleButtonClick = (value) => {
-        setInput(input + value);
-    };
+  const clearInput = () => {
+    setInput("");
+  };
 
-    const clearInput = () => {
-        setInput(''); // Clears the entire input
-    };
+  const clearLastCharacter = () => {
+    setInput(input.slice(0, -1));
+  };
 
-    const clearLastCharacter = () => {
-        setInput(input.slice(0, -1)); // Clears the last character
-    };
+  const calculateResult = () => {
+    try {
+      setInput(eval(input).toString());
+    } catch (error) {
+      setInput("Error");
+    }
+  };
 
-    const calculateResult = () => {
-        try {
-            setInput(eval(input).toString());
-        } catch {
-            setInput('Error');
-        }
-    };
+  const toggleMode = () => {
+    setIsScientificMode(!isScientificMode);
+  };
 
-    // Scientific functions
-    const handleScientificFunction = (fn) => {
-        switch (fn) {
-            case 'sqrt':
-                setInput(Math.sqrt(eval(input)).toString());
-                break;
-            case 'pow':
-                setInput(Math.pow(eval(input), 2).toString()); // Power of 2
-                break;
-            case 'sin':
-                setInput(Math.sin(eval(input)).toString());
-                break;
-            case 'cos':
-                setInput(Math.cos(eval(input)).toString());
-                break;
-            case 'tan':
-                setInput(Math.tan(eval(input)).toString());
-                break;
-            case 'log':
-                setInput(Math.log10(eval(input)).toString());
-                break;
-            case 'factorial':
-                setInput(factorial(eval(input)).toString());
-                break;
-            default:
-                break;
-        }
-    };
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
-    // Factorial Function
-    const factorial = (n) => {
-        if (n < 0) return 'Error'; 
-        return n === 0 || n === 1 ? 1 : n * factorial(n - 1);
-    };
+  const toggleRadians = () => {
+    setIsRadians(!isRadians);
+  };
 
-    const toggleTheme = () => {
-        setIsDarkMode(!isDarkMode);
-    };
+  const handleScientificFunction = (fn) => {
+    try {
+      const val = eval(input) || 0;
+      switch (fn) {
+        case "sqrt":
+          setInput(Math.sqrt(val).toString());
+          break;
+        case "sin":
+          setInput(isRadians ? Math.sin(val).toString() : Math.sin(val * (Math.PI / 180)).toString());
+          break;
+        case "cos":
+          setInput(isRadians ? Math.cos(val).toString() : Math.cos(val * (Math.PI / 180)).toString());
+          break;
+        case "tan":
+          setInput(isRadians ? Math.tan(val).toString() : Math.tan(val * (Math.PI / 180)).toString());
+          break;
+        case "log":
+          setInput(Math.log10(val).toString());
+          break;
+        case "ln":
+          setInput(Math.log(val).toString());
+          break;
+        case "exp":
+          setInput(Math.exp(val).toString());
+          break;
+        case "pow":
+          setInput(Math.pow(val, 2).toString());
+          break;
+          case "powXY":
+            setInput(input + "**");
+            break;
+          case "e":
+            setInput(Math.E.toString());
+            break;
+        case "pi":
+          setInput(Math.PI.toString());
+          break;
+        case "factorial":
+          setInput(factorial(val).toString());
+          break;
+          case "asin":
+            setInput(isRadians ? Math.asin(val).toString() : (Math.asin(val) * (180 / Math.PI)).toString());
+            break;
+          case "acos":
+            setInput(isRadians ? Math.acos(val).toString() : (Math.acos(val) * (180 / Math.PI)).toString());
+            break;
+          case "atan":
+            setInput(isRadians ? Math.atan(val).toString() : (Math.atan(val) * (180 / Math.PI)).toString());
+            break;
+        default:
+          break;
+      }
+    } catch {
+      setInput("Error");
+    }
+  };
 
-    return (
-        <div className={`calculator ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
-            <button onClick={toggleTheme} className="toggle-button">
-                {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+  const factorial = (n) => (n === 0 ? 1 : n * factorial(n - 1));
+
+  return (
+    <div className={`calculator ${isDarkMode ? "dark-mode" : "light-mode"}`}>
+      <div className="header">
+        <button onClick={toggleTheme}>{isDarkMode ? "Light Mode" : "Dark Mode"}</button>
+        <button onClick={toggleMode}>{isScientificMode ? "Normal Mode" : "Scientific Mode"}</button>
+      </div>
+
+      <input type="text" value={input} readOnly className="input" />
+
+      <div className="buttons">
+        {["7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", ".", "="].map((btn) => (
+          <button
+            key={btn}
+            onClick={btn === "=" ? calculateResult : () => handleButtonClick(btn)}
+            className={["/", "*", "-", "+", "="].includes(btn) ? "operator-button" : "button"}
+          >
+            {btn}
+          </button>
+        ))}
+        <button onClick={() => handleButtonClick("+")} className="operator-button">
+          +
+        </button>
+      </div>
+
+      {/* {isScientificMode && (
+        <div className="scientific-buttons">
+          <button onClick={toggleRadians}>{isRadians ? "RAD" : "DEG"}</button>
+          {["sqrt", "pow", "factorial", "log", "ln", "exp", "pi", "sin", "cos", "tan"].map((fn) => (
+            <button key={fn} onClick={() => handleScientificFunction(fn)} className="scientific-button">
+              {fn}
             </button>
-            <input
-                type="text"
-                value={input}
-                readOnly
-                className="input"
-            />
-            <div className="buttons">
-                {/* Add Scientific Buttons */}
-                {['7', '8', '9', '/', '4', '5', '6', '*', '1', '2', '3', '-', '0', '.', '=', '+'].map((btn) => (
-                    <button
-                        key={btn}
-                        onClick={
-                            btn === '='
-                                ? calculateResult
-                                : btn === 'AC'
-                                ? clearLastCharacter
-                                : () => handleButtonClick(btn)
-                        }
-                        className={['/', '*', '-', '+', '='].includes(btn) ? 'operator-button' : 'button'}
-                    >
-                        {btn}
-                    </button>
-                ))}
-                {/* Scientific function buttons */}
-                {['sqrt', 'pow', 'sin', 'cos', 'tan', 'log', 'factorial'].map((fn) => (
-                    <button key={fn} onClick={() => handleScientificFunction(fn)} className="scientific-button">
-                        {fn}
-                    </button>
-                ))}
-                <button onClick={clearInput} className="clear-button">
-                    C
-                </button>
-                <button onClick={clearLastCharacter} className="ac-button">
-                    AC
-                </button>
-            </div>
+          ))}
         </div>
-    );
-}
+      )} */}
+
+{isScientificMode && (
+        <div className="scientific-buttons">
+          {["RAD/DEG", "sqrt", "pow", "factorial", "log", "ln", "exp", "pi", "e", "powXY", "sin", "cos", "tan", "asin", "acos", "atan"].map(
+            (fn, idx) => (
+              <button
+                key={idx}
+                onClick={fn === "RAD/DEG" ? toggleRadians : () => handleScientificFunction(fn)}
+                className="scientific-button"
+              >
+                {fn === "RAD/DEG" ? (isRadians ? "RAD" : "DEG") : fn}
+              </button>
+            )
+          )}
+        </div>
+      )}
+
+      <div className="clear-buttons">
+        <button onClick={clearLastCharacter} className="ac-button">
+          AC
+        </button>
+        <button onClick={clearInput} className="clear-button">
+          C
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default App;
