@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import { evaluate } from "mathjs"; // Math.js for safe evaluation
 
 const App = () => {
   const [input, setInput] = useState("");
@@ -21,7 +22,7 @@ const App = () => {
 
   const calculateResult = () => {
     try {
-      setInput(eval(input).toString());
+      setInput(evaluate(input).toString()); // Safely evaluate the input
     } catch (error) {
       setInput("Error");
     }
@@ -41,7 +42,7 @@ const App = () => {
 
   const handleScientificFunction = (fn) => {
     try {
-      const val = eval(input) || 0;
+      const val = Number(input) || 0; // Safely parse input as a number
       switch (fn) {
         case "sqrt":
           setInput(Math.sqrt(val).toString());
@@ -67,27 +68,27 @@ const App = () => {
         case "pow":
           setInput(Math.pow(val, 2).toString());
           break;
-          case "powXY":
-            setInput(input + "**");
-            break;
-          case "e":
-            setInput(Math.E.toString());
-            break;
+        case "powXY":
+          setInput(input + "**"); // Append power operator for later parsing
+          break;
+        case "e":
+          setInput(Math.E.toString());
+          break;
         case "pi":
           setInput(Math.PI.toString());
           break;
         case "factorial":
           setInput(factorial(val).toString());
           break;
-          case "asin":
-            setInput(isRadians ? Math.asin(val).toString() : (Math.asin(val) * (180 / Math.PI)).toString());
-            break;
-          case "acos":
-            setInput(isRadians ? Math.acos(val).toString() : (Math.acos(val) * (180 / Math.PI)).toString());
-            break;
-          case "atan":
-            setInput(isRadians ? Math.atan(val).toString() : (Math.atan(val) * (180 / Math.PI)).toString());
-            break;
+        case "asin":
+          setInput(isRadians ? Math.asin(val).toString() : (Math.asin(val) * (180 / Math.PI)).toString());
+          break;
+        case "acos":
+          setInput(isRadians ? Math.acos(val).toString() : (Math.acos(val) * (180 / Math.PI)).toString());
+          break;
+        case "atan":
+          setInput(isRadians ? Math.atan(val).toString() : (Math.atan(val) * (180 / Math.PI)).toString());
+          break;
         default:
           break;
       }
@@ -122,18 +123,7 @@ const App = () => {
         </button>
       </div>
 
-      {/* {isScientificMode && (
-        <div className="scientific-buttons">
-          <button onClick={toggleRadians}>{isRadians ? "RAD" : "DEG"}</button>
-          {["sqrt", "pow", "factorial", "log", "ln", "exp", "pi", "sin", "cos", "tan"].map((fn) => (
-            <button key={fn} onClick={() => handleScientificFunction(fn)} className="scientific-button">
-              {fn}
-            </button>
-          ))}
-        </div>
-      )} */}
-
-{isScientificMode && (
+      {isScientificMode && (
         <div className="scientific-buttons">
           {["RAD/DEG", "sqrt", "pow", "factorial", "log", "ln", "exp", "pi", "e", "powXY", "sin", "cos", "tan", "asin", "acos", "atan"].map(
             (fn, idx) => (
@@ -162,3 +152,4 @@ const App = () => {
 };
 
 export default App;
+
