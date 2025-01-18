@@ -1,4 +1,13 @@
 /* General Calculator Styles */
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
 .calculator {
   width: 300px;
   margin: 50px auto;
@@ -28,10 +37,9 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: white;
-  
 }
 
-.dark-mode .input{
+.dark-mode .input {
   background-color: #444;
   border: none;
 }
@@ -48,7 +56,7 @@
   margin-top: 20px;
 }
 
-.button{
+.button {
   height: 50px;
   font-size: 18px;
   color: white;
@@ -70,7 +78,7 @@
   transition: background-color 0.3s;
 }
 
-.scientific-button{
+.scientific-button {
   height: 50px;
   font-size: 18px;
   border: none;
@@ -78,9 +86,7 @@
   border-radius: 5px;
   color: white;
   cursor: pointer;
- }
-
-
+}
 
 /* Clear Buttons */
 .clear-buttons {
@@ -123,7 +129,6 @@
   color: white;
   /* border-color: #555; */
 }
-
 
 .dark-mode .button {
   background-color: #444;
